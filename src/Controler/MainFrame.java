@@ -25,26 +25,27 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
     
+    public ImageDisplay getImageDisplay() {
+        return imageDisplay;
+    }
+ 
+    private JPanel imageDisplay() {
+        SwingImageDisplay sid = new SwingImageDisplay();
+        this.imageDisplay = sid;
+        return sid;
+    }
+    
     private JPanel toolBar() {
         JPanel panel = new JPanel();
         panel.add(prevButton());
         panel.add(nextButton());
         return panel;
     }
-    
+      
     private JButton prevButton() {
         JButton button = new JButton("<");
         button.addActionListener(prevImage());
         return button;
-    }
-    
-    private ActionListener prevImage() {
-        return new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            imageDisplay.show(imageDisplay.current().prev());
-            }
-        };
     }
     
     private JButton nextButton() {
@@ -53,7 +54,23 @@ public class MainFrame extends JFrame {
         return button;
     }
     
+    private ActionListener prevImage() {
+        return e -> imageDisplay.show(imageDisplay.current().prev());
+    }
+        /**
+        return new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            imageDisplay.show(imageDisplay.current().prev());
+            }
+        };
+    }
+    **/
+
     private ActionListener nextImage() {
+        return e -> imageDisplay.show(imageDisplay.current().next());
+    }
+    /**
         return new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -61,16 +78,7 @@ public class MainFrame extends JFrame {
             }
         };
     }
-    
-    private JPanel imageDisplay() {
-        SwingImageDisplay sid = new SwingImageDisplay();
-        this.imageDisplay = sid;
-        return sid;
-    }
-    
-    public ImageDisplay getImageDisplay() {
-        return imageDisplay;
-    }
+    **/
 } 
 
     

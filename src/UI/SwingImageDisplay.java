@@ -26,7 +26,13 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay{
     @Override
     public void paint(Graphics g) {
         if (currentImage == null) return;
-            g.drawImage(imageOf(currentImage),0,0,null);
+            g.drawImage(
+                    imageOf(currentImage),
+                    0,
+                    0,
+                    this.getWidth(),
+                    this.getHeight(),
+                    null);
     }
         
     private BufferedImage imageOf(Image image) {
@@ -36,6 +42,6 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay{
                 e.printStackTrace();
                 return null;
             }
-        };
+        }
     }
 

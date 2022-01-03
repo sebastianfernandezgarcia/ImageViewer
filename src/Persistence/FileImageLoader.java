@@ -10,12 +10,14 @@ import java.io.InputStream;
 
 
 public class FileImageLoader implements ImageLoader {
+    
     private final File[] files;
     
     public FileImageLoader(File folder) {
         this.files = folder.listFiles(imageTypes());
     }
     
+    /**
     private FileFilter imageTypes() {
         return new FileFilter() {
     
@@ -25,6 +27,11 @@ public class FileImageLoader implements ImageLoader {
         }
         };
     }
+    **/
+    
+        private FileFilter imageTypes() {
+            return (File pathname) -> pathname.getName().endsWith(".jpg");
+        }
     
         @Override
         public Image load() {
