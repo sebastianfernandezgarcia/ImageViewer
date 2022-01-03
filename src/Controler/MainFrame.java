@@ -1,5 +1,6 @@
 package Controler;
 
+import Persistence.ImageLoader;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -14,8 +15,10 @@ import UI.SwingImageDisplay;
 public class MainFrame extends JFrame {
     
     private ImageDisplay imageDisplay;
+    final ImageLoader imageLoader;
     
-    public MainFrame() {
+    public MainFrame(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader; 
         this.setTitle("Image Viewer");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800,600);
@@ -55,7 +58,7 @@ public class MainFrame extends JFrame {
     }
     
     private ActionListener prevImage() {
-        return e -> imageDisplay.show(imageDisplay.current().prev());
+        return e -> imageDisplay.show(imageLoader.prev());
     }
         /**
         return new ActionListener() {
@@ -68,7 +71,7 @@ public class MainFrame extends JFrame {
     **/
 
     private ActionListener nextImage() {
-        return e -> imageDisplay.show(imageDisplay.current().next());
+        return e -> imageDisplay.show(imageLoader.next());
     }
     /**
         return new ActionListener() {
