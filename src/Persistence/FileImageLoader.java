@@ -1,6 +1,7 @@
 package Persistence;
 
 import Model.Image;
+import Model.RealImage;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileFilter;
@@ -38,22 +39,18 @@ public class FileImageLoader implements ImageLoader {
     
         @Override
         public Image load() {
-        return new Image() {
-            @Override
-            public String name() {
-                return files[current].getName();
-            }
-
-            @Override
-            public InputStream stream() {
-                try {
-                    return new BufferedInputStream(new FileInputStream(files[current]));
-                } catch (FileNotFoundException e) {
-                    return null;
-                }
-            }
-
-        };
+            return new RealImage(
+                    files[current].getName(),
+                    this.getStream(files[current])    
+        );
+    }
+        
+    private InputStream getStream(File file) {
+        try {
+            return new BufferedInputStream(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 
     @Override
