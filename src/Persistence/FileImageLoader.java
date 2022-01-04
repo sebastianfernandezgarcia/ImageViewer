@@ -1,6 +1,7 @@
 package Persistence;
 
 import Model.Image;
+import Model.ProxyImage;
 import Model.RealImage;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -39,19 +40,10 @@ public class FileImageLoader implements ImageLoader {
     
         @Override
         public Image load() {
-            return new RealImage(
-                    files[current].getName(),
-                    this.getStream(files[current])    
-        );
+            return new ProxyImage(this.files[this.current]);
     }
         
-    private InputStream getStream(File file) {
-        try {
-            return new BufferedInputStream(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            return null;
-        }
-    }
+
 
     @Override
     public Image next() {
